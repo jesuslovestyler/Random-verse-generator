@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="Tyler's corner of the web — free games, devotionals, and everyday tools, all given freely. Jesus loves you." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jesuslovestyler.com/" />
+    <meta property="og:title" content="Jesus Loves Tyler" />
+    <meta property="og:description" content="Tyler's corner of the web — free games, devotionals, and everyday tools, all given freely. Jesus loves you." />
+    <meta property="og:image" content="https://jesuslovestyler.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://jesuslovestyler.com/" />
+    <meta name="twitter:title" content="Jesus Loves Tyler" />
+    <meta name="twitter:description" content="Tyler's corner of the web — free games, devotionals, and everyday tools, all given freely. Jesus loves you." />
+    <meta name="twitter:image" content="https://jesuslovestyler.com/og-image.jpg" />
+    <link rel="icon" href="data:," />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#f5f7f3" />
+    <link rel="apple-touch-icon" href="icon-192.png" />
+    <title>Link Hub</title>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,650&display=swap');
+
+      :root {
+        color-scheme: light dark;
+        --bg: #f5f7f3;
+        --surface: #ffffff;
+        --surface-hover: #eef4ed;
+        --ink: #172019;
+        --muted: #5b685e;
+        --line: #d9e0d9;
+        --accent: #1f6d45;
+        --accent-soft: #e1eee5;
+        --accent-ink: #155234;
+        --input: #ffffff;
+        --shadow: 0 14px 40px rgba(27, 51, 35, 0.08);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #101512;
+          --surface: #171e19;
+          --surface-hover: #1d2921;
+          --ink: #eef4ef;
+          --muted: #aebbb1;
+          --line: #2d3930;
+          --accent: #79c99a;
+          --accent-soft: #1d3526;
+          --accent-ink: #a4dfb7;
+          --input: #151b17;
+          --shadow: 0 14px 40px rgba(0, 0, 0, 0.24);
+        }
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        min-width: 0;
+        background:
+          linear-gradient(90deg, transparent 0 49.9%, color-mix(in srgb, var(--line) 38%, transparent) 50%, transparent 50.1%) center top / min(100%, 1120px) 100% no-repeat,
+          var(--bg);
+        color: var(--ink);
+        font-family: "DM Sans", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      button, input { font: inherit; }
+
+      a { color: inherit; }
+
+      .page {
+        width: min(100% - 36px, 1120px);
+        margin: 0 auto;
+        padding: clamp(48px, 8vw, 92px) 0 76px;
+      }
+
+      .intro {
+        max-width: 760px;
+        padding-bottom: 34px;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 720px;
+        font-family: "Newsreader", Georgia, serif;
+        font-size: clamp(3rem, 7vw, 5.75rem);
+        font-weight: 650;
+        line-height: 0.93;
+        letter-spacing: -0.052em;
+      }
+
+      .lede {
+        margin: 20px 0 0;
+        max-width: 620px;
+        color: var(--muted);
+        font-size: clamp(1rem, 2vw, 1.14rem);
+        line-height: 1.65;
+      }
+
+      .meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
+
+      .meta .dot {
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+
+      .controls {
+        position: sticky;
+        top: 0;
+        z-index: 4;
+        display: grid;
+        grid-template-columns: minmax(260px, 1fr) auto;
+        gap: 12px 20px;
+        align-items: center;
+        margin: 0 -10px 42px;
+        padding: 12px 10px;
+        background: color-mix(in srgb, var(--bg) 92%, transparent);
+        border-bottom: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
+        backdrop-filter: blur(14px);
+      }
+
+      .search-wrap {
+        position: relative;
+        min-width: 0;
+      }
+
+      .search-wrap svg {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        width: 18px;
+        height: 18px;
+        transform: translateY(-50%);
+        color: var(--muted);
+        pointer-events: none;
+      }
+
+      #search {
+        width: 100%;
+        min-height: 48px;
+        padding: 12px 16px 12px 45px;
+        color: var(--ink);
+        background: var(--input);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        outline: none;
+        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+      }
+
+      #search:focus {
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
+      }
+
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 6px;
+      }
+
+      .filter {
+        min-height: 38px;
+        padding: 8px 12px;
+        color: var(--muted);
+        background: transparent;
+        border: 1px solid transparent;
+        border-radius: 999px;
+        cursor: pointer;
+      }
+
+      .filter:hover { color: var(--ink); }
+
+      .filter[aria-pressed="true"] {
+        color: var(--accent-ink);
+        background: var(--accent-soft);
+        border-color: color-mix(in srgb, var(--accent) 26%, transparent);
+      }
+
+      .directory {
+        display: grid;
+        gap: 54px;
+      }
+
+      .section {
+        display: grid;
+        grid-template-columns: minmax(145px, 0.33fr) minmax(0, 1fr);
+        gap: 34px;
+        align-items: start;
+      }
+
+      .section-head {
+        position: sticky;
+        top: 88px;
+      }
+
+      .section h2 {
+        margin: 0;
+        font-family: "Newsreader", Georgia, serif;
+        font-size: 1.7rem;
+        font-weight: 650;
+        letter-spacing: -0.025em;
+      }
+
+      .section-count {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .links {
+        border-top: 1px solid var(--line);
+      }
+
+      .link {
+        display: grid;
+        grid-template-columns: minmax(0, 0.75fr) minmax(180px, 1fr) auto;
+        gap: 22px;
+        align-items: center;
+        min-height: 84px;
+        padding: 17px 13px 17px 4px;
+        text-decoration: none;
+        border-bottom: 1px solid var(--line);
+        transition: background-color 160ms ease, padding 160ms ease;
+      }
+
+      .link:hover,
+      .link:focus-visible {
+        padding-left: 13px;
+        background: var(--surface-hover);
+        outline: none;
+      }
+
+      .link-name {
+        min-width: 0;
+        font-size: 1rem;
+        font-weight: 650;
+        line-height: 1.35;
+      }
+
+      .link-description {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.45;
+      }
+
+      .arrow {
+        display: grid;
+        place-items: center;
+        width: 33px;
+        height: 33px;
+        color: var(--accent-ink);
+        background: var(--accent-soft);
+        border-radius: 50%;
+      }
+
+      .arrow svg { width: 15px; height: 15px; }
+
+      .section[hidden], .link[hidden] { display: none; }
+
+      .empty {
+        display: none;
+        padding: 44px 0 24px;
+        text-align: center;
+        border-top: 1px solid var(--line);
+      }
+
+      .empty.visible { display: block; }
+
+      .empty strong {
+        display: block;
+        font-family: "Newsreader", Georgia, serif;
+        font-size: 1.7rem;
+      }
+
+      .empty span {
+        display: block;
+        margin-top: 7px;
+        color: var(--muted);
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        margin-top: 76px;
+        padding-top: 20px;
+        color: var(--muted);
+        font-size: 0.78rem;
+        border-top: 1px solid var(--line);
+      }
+
+      @media (max-width: 760px) {
+        .page { width: min(100% - 28px, 1120px); padding-top: 42px; }
+        h1 { font-size: clamp(3.2rem, 15vw, 4.6rem); }
+        .intro { padding-bottom: 25px; }
+        .controls {
+          grid-template-columns: 1fr;
+          margin-bottom: 36px;
+        }
+        .filters {
+          justify-content: flex-start;
+          flex-wrap: nowrap;
+          gap: 4px;
+          overflow: visible;
+        }
+        .filter { flex: 1 1 auto; padding-inline: 8px; font-size: 0.78rem; }
+        .section { grid-template-columns: 1fr; gap: 13px; }
+        .section-head { position: static; display: flex; align-items: baseline; justify-content: space-between; }
+        .section h2 { font-size: 1.5rem; }
+        .section-count { margin-top: 0; }
+        .directory { gap: 42px; }
+        .link {
+          grid-template-columns: minmax(0, 1fr) auto;
+          gap: 5px 14px;
+          min-height: 86px;
+          padding: 15px 5px;
+        }
+        .link-description { grid-column: 1; font-size: 0.86rem; }
+        .arrow { grid-column: 2; grid-row: 1 / span 2; }
+        footer { flex-direction: column; gap: 6px; }
+      }
+
+      @media (max-width: 410px) {
+        .filter { font-size: 0.72rem; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .link { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="intro" aria-labelledby="page-title">
+        <h1 id="page-title">Everything, in one place.</h1>
+        <p class="lede">Devotionals, everyday tools, and games — every live page gathered into one clean directory.</p>
+        <div class="meta" aria-label="Directory status">
+          <span id="visible-count">55 destinations</span>
+          <span class="dot" aria-hidden="true"></span>
+          <span>Refreshed October 15, 2026</span>
+        </div>
+      </section>
+
+      <div class="controls" aria-label="Filter the directory">
+        <label class="search-wrap">
+          <span class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Search pages</span>
+          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
+          <input id="search" type="search" placeholder="Search all pages" autocomplete="off" />
+        </label>
+        <div class="filters" role="group" aria-label="Categories">
+          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" type="button" data-filter="faith" aria-pressed="false">Faith</button>
+          <button class="filter" type="button" data-filter="tools" aria-pressed="false">Tools</button>
+          <button class="filter" type="button" data-filter="games" aria-pressed="false">Games</button>
+          <button class="filter" type="button" data-filter="projects" aria-pressed="false">Project</button>
+        </div>
+      </div>
+
+      <div class="directory" id="directory">
+        <section class="section" data-category="faith">
+          <div class="section-head">
+            <h2>Faith</h2>
+            <span class="section-count">22 pages</span>
+          </div>
+          <div class="links">
+            <a class="link" href="https://beingwithjesus.com/" target="_blank" rel="noopener" data-search="being with jesus prayer private prayer page">
+              <span class="link-name">Being With Jesus</span><span class="link-description">A quiet page for writing a private prayer.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Gospel-presentation/" target="_blank" rel="noopener" data-search="gospel presentation who jesus is eternal life">
+              <span class="link-name">The Gospel</span><span class="link-description">Who Jesus is and how to receive eternal life.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/First-steps/" target="_blank" rel="noopener" data-search="first steps new believers guide">
+              <span class="link-name">First Steps</span><span class="link-description">A six-step guide for new believers.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Bible-reading-plan/" target="_blank" rel="noopener" data-search="bible reading plan one year 365 days genesis revelation 1189 chapters straight through">
+              <span class="link-name">Bible Reading Plan</span><span class="link-description">One year, 1,189 chapters — straight through from Genesis to Revelation.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Proverb-of-the-day/" target="_blank" rel="noopener" data-search="proverb of the day daily wisdom proverbs chapter today date bible">
+              <span class="link-name">Proverb of the Day</span><span class="link-description">A daily dose of wisdom — the chapter of Proverbs matching today’s date.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Fruit-of-the-spirit/" target="_blank" rel="noopener" data-search="fruit of the spirit galatians 5 22 23 nine day devotional love joy peace patience kindness goodness faithfulness gentleness self-control">
+              <span class="link-name">Fruit of the Spirit</span><span class="link-description">A nine-day devotional through Galatians 5:22–23.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Assurance/" target="_blank" rel="noopener" data-search="assurance salvation devotional">
+              <span class="link-name">Assurance</span><span class="link-description">A devotional on knowing you have eternal life.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Armor-of-God/" target="_blank" rel="noopener" data-search="armor of god ephesians 6 devotional">
+              <span class="link-name">The Armor of God</span><span class="link-description">A devotional through Ephesians 6:10–18.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Beatitudes/" target="_blank" rel="noopener" data-search="beatitudes blessed are matthew 5 devotional">
+              <span class="link-name">The Beatitudes</span><span class="link-description">“Blessed are” — Matthew 5:3–12.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Comfort-verses/" target="_blank" rel="noopener" data-search="comfort verses anxiety fear grief sleeplessness hard nights">
+              <span class="link-name">Comfort Verses</span><span class="link-description">Scripture for anxiety, fear, grief, and hard nights.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/He-is-risen/" target="_blank" rel="noopener" data-search="he is risen resurrection case">
+              <span class="link-name">He Is Risen</span><span class="link-description">A five-point case for the resurrection.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Jesus-loves-children/" target="_blank" rel="noopener" data-search="jesus loves children bible promises">
+              <span class="link-name">Jesus Loves Children</span><span class="link-description">Five Bible promises for children.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Names-of-Jesus/" target="_blank" rel="noopener" data-search="names of jesus titles fifteen">
+              <span class="link-name">The Names of Jesus</span><span class="link-description">Fifteen names and titles of Jesus.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Psalm-23/" target="_blank" rel="noopener" data-search="psalm 23 lord shepherd devotional">
+              <span class="link-name">Psalm 23</span><span class="link-description">A verse-by-verse devotional on the Shepherd psalm.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Psalm-91/" target="_blank" rel="noopener" data-search="psalm 91 refuge fortress devotional">
+              <span class="link-name">Psalm 91</span><span class="link-description">A verse-by-verse devotional on refuge and protection.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/For-the-grieving/" target="_blank" rel="noopener" data-search="for the grieving grief comfort loss devotional">
+              <span class="link-name">For the Grieving</span><span class="link-description">Comfort and Scripture for seasons of grief.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/For-the-lonely/" target="_blank" rel="noopener" data-search="for the lonely loneliness comfort devotional">
+              <span class="link-name">For the Lonely</span><span class="link-description">Hope and companionship for lonely days.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/For-the-sick/" target="_blank" rel="noopener" data-search="for the sick he heals healing comfort scripture prayer promises">
+              <span class="link-name">For the Sick — He Heals</span><span class="link-description">God’s promises of healing, Scripture, and prayer.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Lords-prayer/" target="_blank" rel="noopener" data-search="lords prayer our father prayer devotional">
+              <span class="link-name">The Lord’s Prayer</span><span class="link-description">A closer walk through the prayer Jesus taught.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Love-chapter/" target="_blank" rel="noopener" data-search="love chapter 1 corinthians 13 devotional">
+              <span class="link-name">The Love Chapter</span><span class="link-description">A devotional journey through 1 Corinthians 13.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Romans-8/" target="_blank" rel="noopener" data-search="romans 8 no condemnation spirit adoption devotional">
+              <span class="link-name">Romans 8</span><span class="link-description">A devotional through the promises of Romans 8.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Weary-caregiver/" target="_blank" rel="noopener" data-search="weary caregiver care comfort rest devotional">
+              <span class="link-name">For the Weary Caregiver</span><span class="link-description">Gentle encouragement for those carrying the work of care.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </div>
+        </section>
+
+        <section class="section" data-category="tools">
+          <div class="section-head">
+            <h2>Tools</h2>
+            <span class="section-count">13 pages</span>
+          </div>
+          <div class="links">
+            <a class="link" href="https://jesuslovestyler.github.io/Calculator/" target="_blank" rel="noopener" data-search="calculator tithe ten percent math">
+              <span class="link-name">Calculator</span><span class="link-description">A clean calculator with a 10% tithe shortcut.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Domain-checker/" target="_blank" rel="noopener" data-search="domain checker availability website name">
+              <span class="link-name">Domain Checker</span><span class="link-description">Look up whether a domain name is available.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/QR-code-generator/" target="_blank" rel="noopener" data-search="qr code generator wifi link email phone png">
+              <span class="link-name">QR Code Generator</span><span class="link-description">Make downloadable QR codes for links, Wi-Fi, email, and more.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Unit-converter/" target="_blank" rel="noopener" data-search="unit converter length weight volume temperature area">
+              <span class="link-name">Unit Converter</span><span class="link-description">Convert length, weight, volume, temperature, and area.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Verse-image-maker/" target="_blank" rel="noopener" data-search="verse image maker bible scripture png cards">
+              <span class="link-name">Verse Image Maker</span><span class="link-description">Turn a Bible verse into a downloadable image.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Verses-for-the-moment/" target="_blank" rel="noopener" data-search="verses for the moment anxiety grief weariness fitting verse web copy share">
+              <span class="link-name">Verses for the Moment</span><span class="link-description">Pick what you’re carrying — anxiety, grief, weariness — and receive a fitting verse (WEB), with copy-to-share.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Random-verse-generator/" target="_blank" rel="noopener" data-search="random verse generator bible scripture web draw one tap copy share">
+              <span class="link-name">Random Verse Generator</span><span class="link-description">One tap draws a random verse from across the whole Bible (WEB) — copy it to share.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Color-mixer/" target="_blank" rel="noopener" data-search="painters color mixer painting creative playground find color brushstroke">
+              <span class="link-name">Painter's Color Mixer</span><span class="link-description">Find the color before the first brushstroke.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Artifact-engineering-manifesto/" target="_blank" rel="noopener" data-search="artifact engineering manifesto building principles">
+              <span class="link-name">Artifact Engineering Manifesto</span><span class="link-description">Principles for building useful, thoughtful artifacts.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Breathing-pacer/" target="_blank" rel="noopener" data-search="breathing pacer breathe calm timer">
+              <span class="link-name">Breathing Pacer</span><span class="link-description">A simple visual rhythm for slow, steady breathing.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Clock-artifact/" target="_blank" rel="noopener" data-search="clock artifact time">
+              <span class="link-name">Clock</span><span class="link-description">A clean, focused clock for keeping time in view.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Dice-roller/" target="_blank" rel="noopener" data-search="dice roller random roll game tool">
+              <span class="link-name">Dice Roller</span><span class="link-description">Roll digital dice whenever you need a quick result.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/White-noise-artifact/" target="_blank" rel="noopener" data-search="white noise ambient sound focus rest">
+              <span class="link-name">White Noise</span><span class="link-description">Ambient sound for focus, rest, or a quieter room.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </div>
+        </section>
+
+        <section class="section" data-category="games">
+          <div class="section-head">
+            <h2>Games</h2>
+            <span class="section-count">19 pages</span>
+          </div>
+          <div class="links">
+            <a class="link" href="https://jesuslovestyler.github.io/Around-the-world/" target="_blank" rel="noopener" data-search="around the world basketball shooting hoop spots playground classic game">
+              <span class="link-name">Around the World</span><span class="link-description">The playground classic — shoot from spots around the hoop, make it to move on, clear them all to win.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Block-crasher/" target="_blank" rel="noopener" data-search="block crasher falling block puzzle game">
+              <span class="link-name">Block Crasher</span><span class="link-description">A quick falling-block puzzle game.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Bluegill-pond/" target="_blank" rel="noopener" data-search="bluegill pond fishing game cast bobber hook fish catch">
+              <span class="link-name">Bluegill Pond</span><span class="link-description">A quiet little fishing game — cast, watch the bobber, set the hook, and see how big a bluegill you can land.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Brick-breaker/" target="_blank" rel="noopener" data-search="brick breaker arcade game">
+              <span class="link-name">Brick Breaker</span><span class="link-description">Classic paddle-and-ball arcade play.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Fruit-hopper/" target="_blank" rel="noopener" data-search="fruit hopper platform game side scrolling">
+              <span class="link-name">Fruit Hopper</span><span class="link-description">A bright, side-scrolling platform game.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Fruit-invaders/" target="_blank" rel="noopener" data-search="fruit invaders space arcade game">
+              <span class="link-name">Fruit Invaders</span><span class="link-description">A fruit-filled take on a space arcade classic.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Garden-guard/" target="_blank" rel="noopener" data-search="garden guard moles whack collards garden game">
+              <span class="link-name">Garden Guard</span><span class="link-description">The moles are after the collards — bop them back down and guard the garden.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Mahjong/" target="_blank" rel="noopener" data-search="mahjong solitaire tiles game">
+              <span class="link-name">Mahjong</span><span class="link-description">A full 144-tile Mahjong solitaire game.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Meteor-breaker/" target="_blank" rel="noopener" data-search="meteor breaker space rock shooter meteors ship blast game">
+              <span class="link-name">Meteor Breaker</span><span class="link-description">An original space-rock shooter — pilot your ship, blast the meteors, and don’t get hit.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Minesweeper/" target="_blank" rel="noopener" data-search="minesweeper mine sweeping puzzle game flag reveal">
+              <span class="link-name">Minesweeper</span><span class="link-description">The classic mine-sweeping puzzle — three difficulties, tap to reveal, long-press to flag.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Paddle-duel/" target="_blank" rel="noopener" data-search="paddle duel paddle ball duel first to 7 wins game">
+              <span class="link-name">Paddle Duel</span><span class="link-description">An original paddle-and-ball duel — slide your paddle, aim your returns, first to 7 wins.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Penalty-shootout/" target="_blank" rel="noopener" data-search="penalty shootout soccer football goalkeeper keeper spot kicks flick shoot game">
+              <span class="link-name">Penalty Shootout</span><span class="link-description">Best-of-five from the spot — flick to shoot past the keeper, then guard your own goal.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Snack-maze/" target="_blank" rel="noopener" data-search="snack maze maze chase game snack dots grumps power apple">
+              <span class="link-name">Snack Maze</span><span class="link-description">An original maze-chase game — guide the turtle, gobble every berry, dodge the slugs, and turn the tables with a power strawberry.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Snake/" target="_blank" rel="noopener" data-search="snake arcade fruit game">
+              <span class="link-name">Snake</span><span class="link-description">Classic Snake with fruit, speed, and swipe controls.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Solitaire/" target="_blank" rel="noopener" data-search="solitaire klondike card game">
+              <span class="link-name">Solitaire</span><span class="link-description">A complete game of Klondike solitaire.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Sudoku/" target="_blank" rel="noopener" data-search="sudoku easy medium hard puzzle game">
+              <span class="link-name">Sudoku</span><span class="link-description">Playable puzzles in easy, medium, and hard modes.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Touchdown-run/" target="_blank" rel="noopener" data-search="touchdown run football running back dodge defenders end zone score game">
+              <span class="link-name">Touchdown Run</span><span class="link-description">You’re the running back — dodge the defenders, break into the end zone, score the touchdown.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Tunnel-trouble/" target="_blank" rel="noopener" data-search="tunnel trouble digging game underground dirt critters pump boulders">
+              <span class="link-name">Tunnel Trouble</span><span class="link-description">Tunnel through the dirt, pump up the critters, and drop boulders on them.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+            <a class="link" href="https://jesuslovestyler.github.io/Virtual-batting-cage/" target="_blank" rel="noopener" data-search="virtual batting cage baseball swing pitches rounds game">
+              <span class="link-name">Virtual Batting Cage</span><span class="link-description">Step up to the plate — time your swing against 30 pitches across six increasingly fast rounds.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </div>
+        </section>
+
+        <section class="section" data-category="projects">
+          <div class="section-head">
+            <h2>Project</h2>
+            <span class="section-count">1 site</span>
+          </div>
+          <div class="links">
+            <a class="link" href="https://homeworkturtle.com/" target="_blank" rel="noopener" data-search="homework turtle student study organizer shelly tutor">
+              <span class="link-name">Homework Turtle</span><span class="link-description">Homework help, organization, and patient step-by-step tutoring.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <div class="empty" id="empty" role="status" aria-live="polite">
+        <strong>No pages found</strong>
+        <span>Try a different word or category.</span>
+      </div>
+
+      <footer>
+        <span>55 destinations</span>
+        <span id="visit-count" hidden><span id="visit-count-num"></span> visits</span>
+        <span>Last checked October 15, 2026</span>
+      </footer>
+    </main>
+
+    <script>
+      (function () {
+        var search = document.getElementById('search');
+        var filters = Array.prototype.slice.call(document.querySelectorAll('.filter'));
+        var sections = Array.prototype.slice.call(document.querySelectorAll('.section'));
+        var links = Array.prototype.slice.call(document.querySelectorAll('.link'));
+        var count = document.getElementById('visible-count');
+        var empty = document.getElementById('empty');
+        var activeCategory = 'all';
+
+        function applyFilters() {
+          var term = search.value.trim().toLowerCase();
+          var visible = 0;
+
+          sections.forEach(function (section) {
+            var categoryMatches = activeCategory === 'all' || section.dataset.category === activeCategory;
+            var sectionVisible = 0;
+            var sectionLinks = Array.prototype.slice.call(section.querySelectorAll('.link'));
+
+            sectionLinks.forEach(function (link) {
+              var textMatches = !term || link.dataset.search.indexOf(term) !== -1 || link.textContent.toLowerCase().indexOf(term) !== -1;
+              var show = categoryMatches && textMatches;
+              link.hidden = !show;
+              if (show) sectionVisible += 1;
+            });
+
+            section.hidden = sectionVisible === 0;
+            if (sectionVisible > 0) {
+              var countLabel = section.querySelector('.section-count');
+              countLabel.textContent = sectionVisible + (sectionVisible === 1 ? ' page' : ' pages');
+              visible += sectionVisible;
+            }
+          });
+
+          count.textContent = visible + (visible === 1 ? ' destination' : ' destinations');
+          empty.classList.toggle('visible', visible === 0);
+        }
+
+        search.addEventListener('input', applyFilters);
+
+        filters.forEach(function (button) {
+          button.addEventListener('click', function () {
+            activeCategory = button.dataset.filter;
+            filters.forEach(function (item) {
+              item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+            });
+            applyFilters();
+          });
+        });
+
+        applyFilters();
+      })();
+    </script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        try {
+          navigator.serviceWorker.register('sw.js');
+        } catch (err) {
+          /* Service worker registration failed; the page works without it. */
+        }
+      }
+    </script>
+    <script data-goatcounter="https://jesuslovestyler.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+    <script>
+      (function () {
+        var wrap = document.getElementById('visit-count');
+        var num = document.getElementById('visit-count-num');
+
+        function show(count) {
+          num.textContent = String(count);
+          wrap.hidden = false;
+        }
+
+        /* Fallback: the goatcounter.visit_count integration. Unhide only
+           once the count text has actually been written into the element. */
+        function fallback() {
+          var tries = 0;
+          var timer = setInterval(function () {
+            tries += 1;
+            if (window.goatcounter && typeof window.goatcounter.visit_count === 'function') {
+              clearInterval(timer);
+              try {
+                window.goatcounter.visit_count({ append: '#visit-count-num', no_branding: false });
+              } catch (err) {
+                return; /* Count unavailable; the counter stays hidden. */
+              }
+              var checks = 0;
+              var reveal = setInterval(function () {
+                checks += 1;
+                if (num.textContent.trim() !== '') {
+                  wrap.hidden = false;
+                  clearInterval(reveal);
+                } else if (checks > 40) {
+                  clearInterval(reveal); /* Count never arrived; stay hidden. */
+                }
+              }, 250);
+            } else if (tries > 40) {
+              clearInterval(timer); /* GoatCounter never loaded; stay hidden. */
+            }
+          }, 250);
+        }
+
+        /* Primary: GoatCounter's public counter JSON for the home page
+           (path '/' URL-encoded as %2F). */
+        var done = false;
+        if (window.fetch) {
+          fetch('https://jesuslovestyler.goatcounter.com/counter/%2F.json')
+            .then(function (res) {
+              if (!res.ok) throw new Error('Counter request failed');
+              return res.json();
+            })
+            .then(function (data) {
+              var count = data ? data.count : null;
+              if (count !== null && count !== undefined && String(count).trim() !== '') {
+                done = true;
+                show(String(count).trim());
+              } else if (!done) {
+                done = true;
+                fallback();
+              }
+            })
+            .catch(function () {
+              if (!done) {
+                done = true;
+                fallback();
+              }
+            });
+        } else {
+          fallback();
+        }
+      })();
+    </script>
+    <script>
+      window.addEventListener('appinstalled', function () {
+        if (window.goatcounter && typeof window.goatcounter.count === 'function') {
+          window.goatcounter.count({ path: 'app-installed', event: true });
+        }
+      });
+    </script>
+  </body>
+</html>
