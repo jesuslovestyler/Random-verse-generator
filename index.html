@@ -4,731 +4,489 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
-    <meta name="description" content="Tyler's corner of the web — free games, devotionals, and everyday tools, all given freely. Jesus loves you." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://jesuslovestyler.com/" />
-    <meta property="og:title" content="Jesus Loves Tyler" />
-    <meta property="og:description" content="Tyler's corner of the web — free games, devotionals, and everyday tools, all given freely. Jesus loves you." />
-    <meta property="og:image" content="https://jesuslovestyler.com/og-image.jpg" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://jesuslovestyler.com/" />
-    <meta name="twitter:title" content="Jesus Loves Tyler" />
-    <meta name="twitter:description" content="Tyler's corner of the web — free games, devotionals, and everyday tools, all given freely. Jesus loves you." />
-    <meta name="twitter:image" content="https://jesuslovestyler.com/og-image.jpg" />
     <link rel="icon" href="data:," />
-    <link rel="manifest" href="manifest.webmanifest" />
-    <meta name="theme-color" content="#f5f7f3" />
-    <link rel="apple-touch-icon" href="icon-192.png" />
-    <title>Link Hub</title>
+    <title>Random Verse Generator</title>
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,500;6..72,650&display=swap');
-
       :root {
         color-scheme: light dark;
-        --bg: #f5f7f3;
-        --surface: #ffffff;
-        --surface-hover: #eef4ed;
-        --ink: #172019;
-        --muted: #5b685e;
-        --line: #d9e0d9;
-        --accent: #1f6d45;
-        --accent-soft: #e1eee5;
-        --accent-ink: #155234;
-        --input: #ffffff;
-        --shadow: 0 14px 40px rgba(27, 51, 35, 0.08);
+        --bg: #f6f2e8;
+        --card: #fffefa;
+        --ink: #2e2a21;
+        --muted: #71695a;
+        --accent: #8a621d;
+        --line: #e2dac6;
+        --btn: #476b4d;
+        --btn-ink: #ffffff;
+        --btn-hover: #3c5c42;
+        --btn2-border: #c9bfa5;
+        --btn2-ink: #4c4638;
+        --shadow: 0 10px 30px rgba(90, 74, 40, 0.10);
       }
-
       @media (prefers-color-scheme: dark) {
         :root {
-          --bg: #101512;
-          --surface: #171e19;
-          --surface-hover: #1d2921;
-          --ink: #eef4ef;
-          --muted: #aebbb1;
-          --line: #2d3930;
-          --accent: #79c99a;
-          --accent-soft: #1d3526;
-          --accent-ink: #a4dfb7;
-          --input: #151b17;
-          --shadow: 0 14px 40px rgba(0, 0, 0, 0.24);
+          --bg: #161813;
+          --card: #20231c;
+          --ink: #ede8da;
+          --muted: #a49d89;
+          --accent: #d2ab58;
+          --line: #363a2f;
+          --btn: #5d8563;
+          --btn-ink: #10130e;
+          --btn-hover: #6d9873;
+          --btn2-border: #4a4f40;
+          --btn2-ink: #ddd6c3;
+          --shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
         }
       }
-
       * { box-sizing: border-box; }
-
-      html { scroll-behavior: smooth; }
-
+      html, body { margin: 0; padding: 0; }
       body {
-        margin: 0;
-        min-width: 0;
-        background:
-          linear-gradient(90deg, transparent 0 49.9%, color-mix(in srgb, var(--line) 38%, transparent) 50%, transparent 50.1%) center top / min(100%, 1120px) 100% no-repeat,
-          var(--bg);
+        background: var(--bg);
         color: var(--ink);
-        font-family: "DM Sans", sans-serif;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
         -webkit-font-smoothing: antialiased;
       }
-
-      button, input { font: inherit; }
-
-      a { color: inherit; }
-
-      .page {
-        width: min(100% - 36px, 1120px);
+      .wrap {
+        max-width: 560px;
         margin: 0 auto;
-        padding: clamp(48px, 8vw, 92px) 0 76px;
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        padding: max(20px, env(safe-area-inset-top)) 18px max(18px, env(safe-area-inset-bottom));
       }
-
       .intro {
-        max-width: 760px;
-        padding-bottom: 34px;
-      }
-
-      h1 {
-        margin: 0;
-        max-width: 720px;
-        font-family: "Newsreader", Georgia, serif;
-        font-size: clamp(3rem, 7vw, 5.75rem);
-        font-weight: 650;
-        line-height: 0.93;
-        letter-spacing: -0.052em;
-      }
-
-      .lede {
-        margin: 20px 0 0;
-        max-width: 620px;
-        color: var(--muted);
-        font-size: clamp(1rem, 2vw, 1.14rem);
-        line-height: 1.65;
-      }
-
-      .meta {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-top: 20px;
-        color: var(--muted);
-        font-size: 0.82rem;
-      }
-
-      .meta .dot {
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background: var(--accent);
-      }
-
-      .controls {
-        position: sticky;
-        top: 0;
-        z-index: 4;
-        display: grid;
-        grid-template-columns: minmax(260px, 1fr) auto;
-        gap: 12px 20px;
-        align-items: center;
-        margin: 0 -10px 42px;
-        padding: 12px 10px;
-        background: color-mix(in srgb, var(--bg) 92%, transparent);
-        border-bottom: 1px solid color-mix(in srgb, var(--line) 65%, transparent);
-        backdrop-filter: blur(14px);
-      }
-
-      .search-wrap {
-        position: relative;
-        min-width: 0;
-      }
-
-      .search-wrap svg {
-        position: absolute;
-        left: 15px;
-        top: 50%;
-        width: 18px;
-        height: 18px;
-        transform: translateY(-50%);
-        color: var(--muted);
-        pointer-events: none;
-      }
-
-      #search {
-        width: 100%;
-        min-height: 48px;
-        padding: 12px 16px 12px 45px;
-        color: var(--ink);
-        background: var(--input);
-        border: 1px solid var(--line);
-        border-radius: 10px;
-        outline: none;
-        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
-      }
-
-      #search:focus {
-        border-color: var(--accent);
-        box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent);
-      }
-
-      .filters {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: flex-end;
-        gap: 6px;
-      }
-
-      .filter {
-        min-height: 38px;
-        padding: 8px 12px;
-        color: var(--muted);
-        background: transparent;
-        border: 1px solid transparent;
-        border-radius: 999px;
-        cursor: pointer;
-      }
-
-      .filter:hover { color: var(--ink); }
-
-      .filter[aria-pressed="true"] {
-        color: var(--accent-ink);
-        background: var(--accent-soft);
-        border-color: color-mix(in srgb, var(--accent) 26%, transparent);
-      }
-
-      .directory {
-        display: grid;
-        gap: 54px;
-      }
-
-      .section {
-        display: grid;
-        grid-template-columns: minmax(145px, 0.33fr) minmax(0, 1fr);
-        gap: 34px;
-        align-items: start;
-      }
-
-      .section-head {
-        position: sticky;
-        top: 88px;
-      }
-
-      .section h2 {
-        margin: 0;
-        font-family: "Newsreader", Georgia, serif;
-        font-size: 1.7rem;
-        font-weight: 650;
-        letter-spacing: -0.025em;
-      }
-
-      .section-count {
-        display: block;
-        margin-top: 6px;
-        color: var(--muted);
-        font-size: 0.8rem;
-      }
-
-      .links {
-        border-top: 1px solid var(--line);
-      }
-
-      .link {
-        display: grid;
-        grid-template-columns: minmax(0, 0.75fr) minmax(180px, 1fr) auto;
-        gap: 22px;
-        align-items: center;
-        min-height: 84px;
-        padding: 17px 13px 17px 4px;
-        text-decoration: none;
-        border-bottom: 1px solid var(--line);
-        transition: background-color 160ms ease, padding 160ms ease;
-      }
-
-      .link:hover,
-      .link:focus-visible {
-        padding-left: 13px;
-        background: var(--surface-hover);
-        outline: none;
-      }
-
-      .link-name {
-        min-width: 0;
-        font-size: 1rem;
-        font-weight: 650;
-        line-height: 1.35;
-      }
-
-      .link-description {
-        color: var(--muted);
-        font-size: 0.9rem;
-        line-height: 1.45;
-      }
-
-      .arrow {
-        display: grid;
-        place-items: center;
-        width: 33px;
-        height: 33px;
-        color: var(--accent-ink);
-        background: var(--accent-soft);
-        border-radius: 50%;
-      }
-
-      .arrow svg { width: 15px; height: 15px; }
-
-      .section[hidden], .link[hidden] { display: none; }
-
-      .empty {
-        display: none;
-        padding: 44px 0 24px;
         text-align: center;
-        border-top: 1px solid var(--line);
-      }
-
-      .empty.visible { display: block; }
-
-      .empty strong {
-        display: block;
-        font-family: "Newsreader", Georgia, serif;
-        font-size: 1.7rem;
-      }
-
-      .empty span {
-        display: block;
-        margin-top: 7px;
         color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.5;
+        margin: 6px 8px 18px;
       }
-
-      footer {
+      .card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        box-shadow: var(--shadow);
+        padding: 30px 24px 26px;
+        min-height: 264px;
         display: flex;
-        justify-content: space-between;
-        gap: 24px;
-        margin-top: 76px;
-        padding-top: 20px;
-        color: var(--muted);
-        font-size: 0.78rem;
-        border-top: 1px solid var(--line);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
       }
-
-      @media (max-width: 760px) {
-        .page { width: min(100% - 28px, 1120px); padding-top: 42px; }
-        h1 { font-size: clamp(3.2rem, 15vw, 4.6rem); }
-        .intro { padding-bottom: 25px; }
-        .controls {
-          grid-template-columns: 1fr;
-          margin-bottom: 36px;
-        }
-        .filters {
-          justify-content: flex-start;
-          flex-wrap: nowrap;
-          gap: 4px;
-          overflow: visible;
-        }
-        .filter { flex: 1 1 auto; padding-inline: 8px; font-size: 0.78rem; }
-        .section { grid-template-columns: 1fr; gap: 13px; }
-        .section-head { position: static; display: flex; align-items: baseline; justify-content: space-between; }
-        .section h2 { font-size: 1.5rem; }
-        .section-count { margin-top: 0; }
-        .directory { gap: 42px; }
-        .link {
-          grid-template-columns: minmax(0, 1fr) auto;
-          gap: 5px 14px;
-          min-height: 86px;
-          padding: 15px 5px;
-        }
-        .link-description { grid-column: 1; font-size: 0.86rem; }
-        .arrow { grid-column: 2; grid-row: 1 / span 2; }
-        footer { flex-direction: column; gap: 6px; }
+      .ornament { margin-bottom: 18px; opacity: 0.85; }
+      .verse-text {
+        font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+        font-size: clamp(1.38rem, 5.4vw, 1.72rem);
+        line-height: 1.55;
+        margin: 0;
+        overflow-wrap: break-word;
       }
-
-      @media (max-width: 410px) {
-        .filter { font-size: 0.72rem; }
+      .verse-ref {
+        margin: 20px 0 0;
+        font-size: 0.92rem;
+        font-weight: 600;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--accent);
       }
-
+      .card.swap .verse-text, .card.swap .verse-ref { animation: fadein 0.45s ease both; }
+      @keyframes fadein {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: none; }
+      }
       @media (prefers-reduced-motion: reduce) {
-        html { scroll-behavior: auto; }
-        .link { transition: none; }
+        .card.swap .verse-text, .card.swap .verse-ref { animation: none; }
+      }
+      .primary {
+        margin-top: 20px;
+        width: 100%;
+        border: none;
+        border-radius: 14px;
+        background: var(--btn);
+        color: var(--btn-ink);
+        font-size: 1.16rem;
+        font-weight: 700;
+        padding: 17px 16px;
+        cursor: pointer;
+        touch-action: manipulation;
+      }
+      .primary:hover { background: var(--btn-hover); }
+      .primary:active { transform: scale(0.99); }
+      .row {
+        display: flex;
+        gap: 12px;
+        margin-top: 12px;
+      }
+      .row button {
+        flex: 1;
+        border-radius: 14px;
+        border: 1.5px solid var(--btn2-border);
+        background: transparent;
+        color: var(--btn2-ink);
+        font-size: 1.02rem;
+        font-weight: 600;
+        padding: 14px 10px;
+        cursor: pointer;
+        touch-action: manipulation;
+      }
+      .row button:active { transform: scale(0.99); }
+      footer {
+        margin-top: auto;
+        padding-top: 22px;
+        text-align: center;
+        color: var(--muted);
+        font-size: 0.86rem;
+        line-height: 1.5;
       }
     </style>
   </head>
   <body>
-    <main class="page">
-      <section class="intro" aria-labelledby="page-title">
-        <h1 id="page-title">Everything, in one place.</h1>
-        <p class="lede">Devotionals, everyday tools, and games — every live page gathered into one clean directory.</p>
-        <div class="meta" aria-label="Directory status">
-          <span id="visible-count">55 destinations</span>
-          <span class="dot" aria-hidden="true"></span>
-          <span>Refreshed October 15, 2026</span>
-        </div>
+    <main class="wrap">
+      <p class="intro">A verse for this moment, drawn at random from across the whole Bible — like letting the pages fall open where they will.</p>
+
+      <section class="card" id="card" aria-live="polite">
+        <svg class="ornament" width="72" height="14" viewBox="0 0 72 14" aria-hidden="true">
+          <line x1="0" y1="7" x2="26" y2="7" stroke="currentColor" stroke-width="1" opacity="0.45" />
+          <rect x="31" y="2" width="10" height="10" transform="rotate(45 36 7)" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.8" />
+          <line x1="46" y1="7" x2="72" y2="7" stroke="currentColor" stroke-width="1" opacity="0.45" />
+        </svg>
+        <p class="verse-text" id="verseText"></p>
+        <p class="verse-ref" id="verseRef"></p>
       </section>
 
-      <div class="controls" aria-label="Filter the directory">
-        <label class="search-wrap">
-          <span class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;">Search pages</span>
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>
-          <input id="search" type="search" placeholder="Search all pages" autocomplete="off" />
-        </label>
-        <div class="filters" role="group" aria-label="Categories">
-          <button class="filter" type="button" data-filter="all" aria-pressed="true">All</button>
-          <button class="filter" type="button" data-filter="faith" aria-pressed="false">Faith</button>
-          <button class="filter" type="button" data-filter="tools" aria-pressed="false">Tools</button>
-          <button class="filter" type="button" data-filter="games" aria-pressed="false">Games</button>
-          <button class="filter" type="button" data-filter="projects" aria-pressed="false">Project</button>
-        </div>
+      <button class="primary" id="drawBtn" type="button">Give me a verse</button>
+
+      <div class="row">
+        <button id="anotherBtn" type="button">Another verse</button>
+        <button id="copyBtn" type="button">Copy verse</button>
       </div>
 
-      <div class="directory" id="directory">
-        <section class="section" data-category="faith">
-          <div class="section-head">
-            <h2>Faith</h2>
-            <span class="section-count">22 pages</span>
-          </div>
-          <div class="links">
-            <a class="link" href="https://beingwithjesus.com/" target="_blank" rel="noopener" data-search="being with jesus prayer private prayer page">
-              <span class="link-name">Being With Jesus</span><span class="link-description">A quiet page for writing a private prayer.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Gospel-presentation/" target="_blank" rel="noopener" data-search="gospel presentation who jesus is eternal life">
-              <span class="link-name">The Gospel</span><span class="link-description">Who Jesus is and how to receive eternal life.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/First-steps/" target="_blank" rel="noopener" data-search="first steps new believers guide">
-              <span class="link-name">First Steps</span><span class="link-description">A six-step guide for new believers.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Bible-reading-plan/" target="_blank" rel="noopener" data-search="bible reading plan one year 365 days genesis revelation 1189 chapters straight through">
-              <span class="link-name">Bible Reading Plan</span><span class="link-description">One year, 1,189 chapters — straight through from Genesis to Revelation.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Proverb-of-the-day/" target="_blank" rel="noopener" data-search="proverb of the day daily wisdom proverbs chapter today date bible">
-              <span class="link-name">Proverb of the Day</span><span class="link-description">A daily dose of wisdom — the chapter of Proverbs matching today’s date.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Fruit-of-the-spirit/" target="_blank" rel="noopener" data-search="fruit of the spirit galatians 5 22 23 nine day devotional love joy peace patience kindness goodness faithfulness gentleness self-control">
-              <span class="link-name">Fruit of the Spirit</span><span class="link-description">A nine-day devotional through Galatians 5:22–23.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Assurance/" target="_blank" rel="noopener" data-search="assurance salvation devotional">
-              <span class="link-name">Assurance</span><span class="link-description">A devotional on knowing you have eternal life.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Armor-of-God/" target="_blank" rel="noopener" data-search="armor of god ephesians 6 devotional">
-              <span class="link-name">The Armor of God</span><span class="link-description">A devotional through Ephesians 6:10–18.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Beatitudes/" target="_blank" rel="noopener" data-search="beatitudes blessed are matthew 5 devotional">
-              <span class="link-name">The Beatitudes</span><span class="link-description">“Blessed are” — Matthew 5:3–12.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Comfort-verses/" target="_blank" rel="noopener" data-search="comfort verses anxiety fear grief sleeplessness hard nights">
-              <span class="link-name">Comfort Verses</span><span class="link-description">Scripture for anxiety, fear, grief, and hard nights.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/He-is-risen/" target="_blank" rel="noopener" data-search="he is risen resurrection case">
-              <span class="link-name">He Is Risen</span><span class="link-description">A five-point case for the resurrection.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Jesus-loves-children/" target="_blank" rel="noopener" data-search="jesus loves children bible promises">
-              <span class="link-name">Jesus Loves Children</span><span class="link-description">Five Bible promises for children.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Names-of-Jesus/" target="_blank" rel="noopener" data-search="names of jesus titles fifteen">
-              <span class="link-name">The Names of Jesus</span><span class="link-description">Fifteen names and titles of Jesus.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Psalm-23/" target="_blank" rel="noopener" data-search="psalm 23 lord shepherd devotional">
-              <span class="link-name">Psalm 23</span><span class="link-description">A verse-by-verse devotional on the Shepherd psalm.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Psalm-91/" target="_blank" rel="noopener" data-search="psalm 91 refuge fortress devotional">
-              <span class="link-name">Psalm 91</span><span class="link-description">A verse-by-verse devotional on refuge and protection.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/For-the-grieving/" target="_blank" rel="noopener" data-search="for the grieving grief comfort loss devotional">
-              <span class="link-name">For the Grieving</span><span class="link-description">Comfort and Scripture for seasons of grief.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/For-the-lonely/" target="_blank" rel="noopener" data-search="for the lonely loneliness comfort devotional">
-              <span class="link-name">For the Lonely</span><span class="link-description">Hope and companionship for lonely days.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/For-the-sick/" target="_blank" rel="noopener" data-search="for the sick he heals healing comfort scripture prayer promises">
-              <span class="link-name">For the Sick — He Heals</span><span class="link-description">God’s promises of healing, Scripture, and prayer.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Lords-prayer/" target="_blank" rel="noopener" data-search="lords prayer our father prayer devotional">
-              <span class="link-name">The Lord’s Prayer</span><span class="link-description">A closer walk through the prayer Jesus taught.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Love-chapter/" target="_blank" rel="noopener" data-search="love chapter 1 corinthians 13 devotional">
-              <span class="link-name">The Love Chapter</span><span class="link-description">A devotional journey through 1 Corinthians 13.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Romans-8/" target="_blank" rel="noopener" data-search="romans 8 no condemnation spirit adoption devotional">
-              <span class="link-name">Romans 8</span><span class="link-description">A devotional through the promises of Romans 8.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Weary-caregiver/" target="_blank" rel="noopener" data-search="weary caregiver care comfort rest devotional">
-              <span class="link-name">For the Weary Caregiver</span><span class="link-description">Gentle encouragement for those carrying the work of care.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-          </div>
-        </section>
-
-        <section class="section" data-category="tools">
-          <div class="section-head">
-            <h2>Tools</h2>
-            <span class="section-count">13 pages</span>
-          </div>
-          <div class="links">
-            <a class="link" href="https://jesuslovestyler.github.io/Calculator/" target="_blank" rel="noopener" data-search="calculator tithe ten percent math">
-              <span class="link-name">Calculator</span><span class="link-description">A clean calculator with a 10% tithe shortcut.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Domain-checker/" target="_blank" rel="noopener" data-search="domain checker availability website name">
-              <span class="link-name">Domain Checker</span><span class="link-description">Look up whether a domain name is available.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/QR-code-generator/" target="_blank" rel="noopener" data-search="qr code generator wifi link email phone png">
-              <span class="link-name">QR Code Generator</span><span class="link-description">Make downloadable QR codes for links, Wi-Fi, email, and more.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Unit-converter/" target="_blank" rel="noopener" data-search="unit converter length weight volume temperature area">
-              <span class="link-name">Unit Converter</span><span class="link-description">Convert length, weight, volume, temperature, and area.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Verse-image-maker/" target="_blank" rel="noopener" data-search="verse image maker bible scripture png cards">
-              <span class="link-name">Verse Image Maker</span><span class="link-description">Turn a Bible verse into a downloadable image.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Verses-for-the-moment/" target="_blank" rel="noopener" data-search="verses for the moment anxiety grief weariness fitting verse web copy share">
-              <span class="link-name">Verses for the Moment</span><span class="link-description">Pick what you’re carrying — anxiety, grief, weariness — and receive a fitting verse (WEB), with copy-to-share.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Random-verse-generator/" target="_blank" rel="noopener" data-search="random verse generator bible scripture web draw one tap copy share">
-              <span class="link-name">Random Verse Generator</span><span class="link-description">One tap draws a random verse from across the whole Bible (WEB) — copy it to share.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Color-mixer/" target="_blank" rel="noopener" data-search="painters color mixer painting creative playground find color brushstroke">
-              <span class="link-name">Painter's Color Mixer</span><span class="link-description">Find the color before the first brushstroke.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Artifact-engineering-manifesto/" target="_blank" rel="noopener" data-search="artifact engineering manifesto building principles">
-              <span class="link-name">Artifact Engineering Manifesto</span><span class="link-description">Principles for building useful, thoughtful artifacts.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Breathing-pacer/" target="_blank" rel="noopener" data-search="breathing pacer breathe calm timer">
-              <span class="link-name">Breathing Pacer</span><span class="link-description">A simple visual rhythm for slow, steady breathing.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Clock-artifact/" target="_blank" rel="noopener" data-search="clock artifact time">
-              <span class="link-name">Clock</span><span class="link-description">A clean, focused clock for keeping time in view.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Dice-roller/" target="_blank" rel="noopener" data-search="dice roller random roll game tool">
-              <span class="link-name">Dice Roller</span><span class="link-description">Roll digital dice whenever you need a quick result.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/White-noise-artifact/" target="_blank" rel="noopener" data-search="white noise ambient sound focus rest">
-              <span class="link-name">White Noise</span><span class="link-description">Ambient sound for focus, rest, or a quieter room.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-          </div>
-        </section>
-
-        <section class="section" data-category="games">
-          <div class="section-head">
-            <h2>Games</h2>
-            <span class="section-count">19 pages</span>
-          </div>
-          <div class="links">
-            <a class="link" href="https://jesuslovestyler.github.io/Around-the-world/" target="_blank" rel="noopener" data-search="around the world basketball shooting hoop spots playground classic game">
-              <span class="link-name">Around the World</span><span class="link-description">The playground classic — shoot from spots around the hoop, make it to move on, clear them all to win.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Block-crasher/" target="_blank" rel="noopener" data-search="block crasher falling block puzzle game">
-              <span class="link-name">Block Crasher</span><span class="link-description">A quick falling-block puzzle game.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Bluegill-pond/" target="_blank" rel="noopener" data-search="bluegill pond fishing game cast bobber hook fish catch">
-              <span class="link-name">Bluegill Pond</span><span class="link-description">A quiet little fishing game — cast, watch the bobber, set the hook, and see how big a bluegill you can land.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Brick-breaker/" target="_blank" rel="noopener" data-search="brick breaker arcade game">
-              <span class="link-name">Brick Breaker</span><span class="link-description">Classic paddle-and-ball arcade play.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Fruit-hopper/" target="_blank" rel="noopener" data-search="fruit hopper platform game side scrolling">
-              <span class="link-name">Fruit Hopper</span><span class="link-description">A bright, side-scrolling platform game.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Fruit-invaders/" target="_blank" rel="noopener" data-search="fruit invaders space arcade game">
-              <span class="link-name">Fruit Invaders</span><span class="link-description">A fruit-filled take on a space arcade classic.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Garden-guard/" target="_blank" rel="noopener" data-search="garden guard moles whack collards garden game">
-              <span class="link-name">Garden Guard</span><span class="link-description">The moles are after the collards — bop them back down and guard the garden.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Mahjong/" target="_blank" rel="noopener" data-search="mahjong solitaire tiles game">
-              <span class="link-name">Mahjong</span><span class="link-description">A full 144-tile Mahjong solitaire game.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Meteor-breaker/" target="_blank" rel="noopener" data-search="meteor breaker space rock shooter meteors ship blast game">
-              <span class="link-name">Meteor Breaker</span><span class="link-description">An original space-rock shooter — pilot your ship, blast the meteors, and don’t get hit.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Minesweeper/" target="_blank" rel="noopener" data-search="minesweeper mine sweeping puzzle game flag reveal">
-              <span class="link-name">Minesweeper</span><span class="link-description">The classic mine-sweeping puzzle — three difficulties, tap to reveal, long-press to flag.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Paddle-duel/" target="_blank" rel="noopener" data-search="paddle duel paddle ball duel first to 7 wins game">
-              <span class="link-name">Paddle Duel</span><span class="link-description">An original paddle-and-ball duel — slide your paddle, aim your returns, first to 7 wins.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Penalty-shootout/" target="_blank" rel="noopener" data-search="penalty shootout soccer football goalkeeper keeper spot kicks flick shoot game">
-              <span class="link-name">Penalty Shootout</span><span class="link-description">Best-of-five from the spot — flick to shoot past the keeper, then guard your own goal.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Snack-maze/" target="_blank" rel="noopener" data-search="snack maze maze chase game snack dots grumps power apple">
-              <span class="link-name">Snack Maze</span><span class="link-description">An original maze-chase game — guide the turtle, gobble every berry, dodge the slugs, and turn the tables with a power strawberry.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Snake/" target="_blank" rel="noopener" data-search="snake arcade fruit game">
-              <span class="link-name">Snake</span><span class="link-description">Classic Snake with fruit, speed, and swipe controls.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Solitaire/" target="_blank" rel="noopener" data-search="solitaire klondike card game">
-              <span class="link-name">Solitaire</span><span class="link-description">A complete game of Klondike solitaire.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Sudoku/" target="_blank" rel="noopener" data-search="sudoku easy medium hard puzzle game">
-              <span class="link-name">Sudoku</span><span class="link-description">Playable puzzles in easy, medium, and hard modes.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Touchdown-run/" target="_blank" rel="noopener" data-search="touchdown run football running back dodge defenders end zone score game">
-              <span class="link-name">Touchdown Run</span><span class="link-description">You’re the running back — dodge the defenders, break into the end zone, score the touchdown.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Tunnel-trouble/" target="_blank" rel="noopener" data-search="tunnel trouble digging game underground dirt critters pump boulders">
-              <span class="link-name">Tunnel Trouble</span><span class="link-description">Tunnel through the dirt, pump up the critters, and drop boulders on them.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-            <a class="link" href="https://jesuslovestyler.github.io/Virtual-batting-cage/" target="_blank" rel="noopener" data-search="virtual batting cage baseball swing pitches rounds game">
-              <span class="link-name">Virtual Batting Cage</span><span class="link-description">Step up to the plate — time your swing against 30 pitches across six increasingly fast rounds.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-          </div>
-        </section>
-
-        <section class="section" data-category="projects">
-          <div class="section-head">
-            <h2>Project</h2>
-            <span class="section-count">1 site</span>
-          </div>
-          <div class="links">
-            <a class="link" href="https://homeworkturtle.com/" target="_blank" rel="noopener" data-search="homework turtle student study organizer shelly tutor">
-              <span class="link-name">Homework Turtle</span><span class="link-description">Homework help, organization, and patient step-by-step tutoring.</span><span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
-            </a>
-          </div>
-        </section>
-      </div>
-
-      <div class="empty" id="empty" role="status" aria-live="polite">
-        <strong>No pages found</strong>
-        <span>Try a different word or category.</span>
-      </div>
-
-      <footer>
-        <span>55 destinations</span>
-        <span id="visit-count" hidden><span id="visit-count-num"></span> visits</span>
-        <span>Last checked October 15, 2026</span>
-      </footer>
+      <footer>World English Bible (WEB) — public domain. Share freely.</footer>
     </main>
 
     <script>
-      (function () {
-        var search = document.getElementById('search');
-        var filters = Array.prototype.slice.call(document.querySelectorAll('.filter'));
-        var sections = Array.prototype.slice.call(document.querySelectorAll('.section'));
-        var links = Array.prototype.slice.call(document.querySelectorAll('.link'));
-        var count = document.getElementById('visible-count');
-        var empty = document.getElementById('empty');
-        var activeCategory = 'all';
+      var VERSES = [
+        { r: "Genesis 1:1", t: "In the beginning, God created the heavens and the earth." },
+        { r: "Genesis 1:27", t: "God created man in his own image. In God\u2019s image he created him; male and female he created them." },
+        { r: "Genesis 1:31", t: "God saw everything that he had made, and, behold, it was very good. There was evening and there was morning, a sixth day." },
+        { r: "Genesis 28:15", t: "Behold, I am with you, and will keep you, wherever you go, and will bring you again into this land. For I will not leave you, until I have done that which I have spoken of to you.\u201d" },
+        { r: "Genesis 50:20", t: "As for you, you meant evil against me, but God meant it for good, to bring to pass, as it is today, to save many people alive." },
+        { r: "Exodus 14:14", t: "Yahweh will fight for you, and you shall be still.\u201d" },
+        { r: "Leviticus 19:18", t: "\u201c\u2018You shall not take vengeance, nor bear any grudge against the children of your people; but you shall love your neighbor as yourself. I am Yahweh." },
+        { r: "Numbers 6:24", t: "\u2018Yahweh bless you, and keep you." },
+        { r: "Numbers 6:25", t: "Yahweh make his face to shine on you, and be gracious to you." },
+        { r: "Numbers 6:26", t: "Yahweh lift up his face toward you, and give you peace.\u2019" },
+        { r: "Deuteronomy 6:5", t: "You shall love Yahweh your God with all your heart, with all your soul, and with all your might." },
+        { r: "Deuteronomy 31:6", t: "Be strong and courageous. Don\u2019t be afraid or scared of them; for Yahweh your God himself is who goes with you. He will not fail you nor forsake you.\u201d" },
+        { r: "Deuteronomy 31:8", t: "Yahweh himself is who goes before you. He will be with you. He will not fail you nor forsake you. Don\u2019t be afraid. Don\u2019t be discouraged.\u201d" },
+        { r: "Joshua 1:8", t: "This book of the law shall not depart from your mouth, but you shall meditate on it day and night, that you may observe to do according to all that is written in it; for then you shall make your way prosperous, and then you shall have good success." },
+        { r: "Joshua 1:9", t: "Haven\u2019t I commanded you? Be strong and courageous. Don\u2019t be afraid. Don\u2019t be dismayed, for Yahweh your God is with you wherever you go.\u201d" },
+        { r: "Ruth 1:16", t: "Ruth said, \u201cDon\u2019t urge me to leave you, and to return from following you, for where you go, I will go; and where you stay, I will stay. Your people will be my people, and your God my God." },
+        { r: "1 Samuel 16:7", t: "But Yahweh said to Samuel, \u201cDon\u2019t look on his face, or on the height of his stature, because I have rejected him; for I don\u2019t see as man sees. For man looks at the outward appearance, but Yahweh looks at the heart.\u201d" },
+        { r: "2 Chronicles 7:14", t: "if my people, who are called by my name, will humble themselves, pray, seek my face, and turn from their wicked ways; then I will hear from heaven, will forgive their sin, and will heal their land." },
+        { r: "Nehemiah 8:10", t: "Then he said to them, \u201cGo your way. Eat the fat, drink the sweet, and send portions to him for whom nothing is prepared, for today is holy to our Lord. Don\u2019t be grieved, for the joy of Yahweh is your strength.\u201d" },
+        { r: "Esther 4:14", t: "For if you remain silent now, then relief and deliverance will come to the Jews from another place, but you and your father\u2019s house will perish. Who knows if you haven\u2019t come to the kingdom for such a time as this?\u201d" },
+        { r: "Job 19:25", t: "But as for me, I know that my Redeemer lives. In the end, he will stand upon the earth." },
+        { r: "Psalm 1:1", t: "Blessed is the man who doesn\u2019t walk in the counsel of the wicked, nor stand on the path of sinners, nor sit in the seat of scoffers;" },
+        { r: "Psalm 1:3", t: "He will be like a tree planted by the streams of water, that produces its fruit in its season, whose leaf also does not wither. Whatever he does shall prosper." },
+        { r: "Psalm 19:1", t: "The heavens declare the glory of God. The expanse shows his handiwork." },
+        { r: "Psalm 19:14", t: "Let the words of my mouth and the meditation of my heart be acceptable in your sight, Yahweh, my rock, and my redeemer." },
+        { r: "Psalm 23:1", t: "Yahweh is my shepherd: I shall lack nothing." },
+        { r: "Psalm 23:2", t: "He makes me lie down in green pastures. He leads me beside still waters." },
+        { r: "Psalm 23:3", t: "He restores my soul. He guides me in the paths of righteousness for his name\u2019s sake." },
+        { r: "Psalm 23:4", t: "Even though I walk through the valley of the shadow of death, I will fear no evil, for you are with me. Your rod and your staff, they comfort me." },
+        { r: "Psalm 23:5", t: "You prepare a table before me in the presence of my enemies. You anoint my head with oil. My cup runs over." },
+        { r: "Psalm 23:6", t: "Surely goodness and loving kindness shall follow me all the days of my life, and I will dwell in Yahweh\u2019s house forever." },
+        { r: "Psalm 27:1", t: "Yahweh is my light and my salvation. Whom shall I fear? Yahweh is the strength of my life. Of whom shall I be afraid?" },
+        { r: "Psalm 27:14", t: "Wait for Yahweh. Be strong, and let your heart take courage. Yes, wait for Yahweh." },
+        { r: "Psalm 34:8", t: "Oh taste and see that Yahweh is good. Blessed is the man who takes refuge in him." },
+        { r: "Psalm 34:18", t: "Yahweh is near to those who have a broken heart, and saves those who have a crushed spirit." },
+        { r: "Psalm 37:4", t: "Also delight yourself in Yahweh, and he will give you the desires of your heart." },
+        { r: "Psalm 37:5", t: "Commit your way to Yahweh. Trust also in him, and he will do this:" },
+        { r: "Psalm 46:1", t: "God is our refuge and strength, a very present help in trouble." },
+        { r: "Psalm 46:10", t: "\u201cBe still, and know that I am God. I will be exalted among the nations. I will be exalted in the earth.\u201d" },
+        { r: "Psalm 51:10", t: "Create in me a clean heart, O God. Renew a right spirit within me." },
+        { r: "Psalm 84:11", t: "For Yahweh God is a sun and a shield. Yahweh will give grace and glory. He withholds no good thing from those who walk blamelessly." },
+        { r: "Psalm 90:12", t: "So teach us to count our days, that we may gain a heart of wisdom." },
+        { r: "Psalm 91:1", t: "He who dwells in the secret place of the Most High will rest in the shadow of the Almighty." },
+        { r: "Psalm 91:2", t: "I will say of Yahweh, \u201cHe is my refuge and my fortress; my God, in whom I trust.\u201d" },
+        { r: "Psalm 100:4", t: "Enter into his gates with thanksgiving, into his courts with praise. Give thanks to him, and bless his name." },
+        { r: "Psalm 100:5", t: "For Yahweh is good. His loving kindness endures forever, his faithfulness to all generations." },
+        { r: "Psalm 103:1", t: "Praise Yahweh, my soul! All that is within me, praise his holy name!" },
+        { r: "Psalm 103:8", t: "Yahweh is merciful and gracious, slow to anger, and abundant in loving kindness." },
+        { r: "Psalm 103:12", t: "As far as the east is from the west, so far has he removed our transgressions from us." },
+        { r: "Psalm 118:24", t: "This is the day that Yahweh has made. We will rejoice and be glad in it!" },
+        { r: "Psalm 119:11", t: "I have hidden your word in my heart, that I might not sin against you." },
+        { r: "Psalm 119:105", t: "Your word is a lamp to my feet, and a light for my path." },
+        { r: "Psalm 121:1", t: "I will lift up my eyes to the hills. Where does my help come from?" },
+        { r: "Psalm 121:2", t: "My help comes from Yahweh, who made heaven and earth." },
+        { r: "Psalm 121:8", t: "Yahweh will keep your going out and your coming in, from this time forward, and forever more." },
+        { r: "Psalm 139:13", t: "For you formed my inmost being. You knit me together in my mother\u2019s womb." },
+        { r: "Psalm 139:14", t: "I will give thanks to you, for I am fearfully and wonderfully made. Your works are wonderful. My soul knows that very well." },
+        { r: "Psalm 145:18", t: "Yahweh is near to all those who call on him, to all who call on him in truth." },
+        { r: "Psalm 150:6", t: "Let everything that has breath praise Yah! Praise Yah!" },
+        { r: "Proverbs 3:5", t: "Trust in Yahweh with all your heart, and don\u2019t lean on your own understanding." },
+        { r: "Proverbs 3:6", t: "In all your ways acknowledge him, and he will make your paths straight." },
+        { r: "Proverbs 4:23", t: "Keep your heart with all diligence, for out of it is the wellspring of life." },
+        { r: "Proverbs 16:3", t: "Commit your deeds to Yahweh, and your plans shall succeed." },
+        { r: "Proverbs 16:9", t: "A man\u2019s heart plans his course, but Yahweh directs his steps." },
+        { r: "Proverbs 17:17", t: "A friend loves at all times; and a brother is born for adversity." },
+        { r: "Proverbs 17:22", t: "A cheerful heart makes good medicine, but a crushed spirit dries up the bones." },
+        { r: "Proverbs 18:10", t: "Yahweh\u2019s name is a strong tower: the righteous run to him, and are safe." },
+        { r: "Ecclesiastes 3:1", t: "For everything there is a season, and a time for every purpose under heaven:" },
+        { r: "Ecclesiastes 3:11", t: "He has made everything beautiful in its time. He has also set eternity in their hearts, yet so that man can\u2019t find out the work that God has done from the beginning even to the end." },
+        { r: "Song of Songs 8:7", t: "Many waters can\u2019t quench love, neither can floods drown it. If a man would give all the wealth of his house for love, he would be utterly scorned." },
+        { r: "Isaiah 6:8", t: "I heard the Lord\u2019s voice, saying, \u201cWhom shall I send, and who will go for us?\u201d Then I said, \u201cHere I am. Send me!\u201d" },
+        { r: "Isaiah 9:6", t: "For to us a child is born. To us a son is given; and the government will be on his shoulders. His name will be called Wonderful, Counselor, Mighty God, Everlasting Father, Prince of Peace." },
+        { r: "Isaiah 26:3", t: "You will keep whoever\u2019s mind is steadfast in perfect peace, because he trusts in you." },
+        { r: "Isaiah 40:28", t: "Haven\u2019t you known? Haven\u2019t you heard? The everlasting God, Yahweh, The Creator of the ends of the earth, doesn\u2019t faint. He isn\u2019t weary. His understanding is unsearchable." },
+        { r: "Isaiah 40:31", t: "But those who wait for Yahweh will renew their strength. They will mount up with wings like eagles. They will run, and not be weary. They will walk, and not faint." },
+        { r: "Isaiah 41:10", t: "Don\u2019t you be afraid, for I am with you. Don\u2019t be dismayed, for I am your God. I will strengthen you. Yes, I will help you. Yes, I will uphold you with the right hand of my righteousness." },
+        { r: "Isaiah 41:13", t: "For I, Yahweh your God, will hold your right hand, saying to you, \u2018Don\u2019t be afraid. I will help you.\u2019" },
+        { r: "Isaiah 43:1", t: "But now Yahweh who created you, Jacob, and he who formed you, Israel says: \u201cDon\u2019t be afraid, for I have redeemed you. I have called you by your name. You are mine." },
+        { r: "Isaiah 43:2", t: "When you pass through the waters, I will be with you; and through the rivers, they will not overflow you. When you walk through the fire, you will not be burned, and flame will not scorch you." },
+        { r: "Isaiah 53:5", t: "But he was pierced for our transgressions. He was crushed for our iniquities. The punishment that brought our peace was on him; and by his wounds we are healed." },
+        { r: "Isaiah 53:6", t: "All we like sheep have gone astray. Everyone has turned to his own way; and Yahweh has laid on him the iniquity of us all." },
+        { r: "Isaiah 55:8", t: "\u201cFor my thoughts are not your thoughts, and your ways are not my ways,\u201d says Yahweh." },
+        { r: "Isaiah 55:11", t: "so is my word that goes out of my mouth: it will not return to me void, but it will accomplish that which I please, and it will prosper in the thing I sent it to do." },
+        { r: "Jeremiah 29:11", t: "For I know the thoughts that I think toward you,\u201d says Yahweh, \u201cthoughts of peace, and not of evil, to give you hope and a future." },
+        { r: "Jeremiah 29:13", t: "You shall seek me, and find me, when you shall search for me with all your heart." },
+        { r: "Jeremiah 33:3", t: "\u2018Call to me, and I will answer you, and will show you great things, and difficult, which you don\u2019t know.\u2019" },
+        { r: "Lamentations 3:22", t: "It is because of Yahweh\u2019s loving kindnesses that we are not consumed, because his compassion doesn\u2019t fail." },
+        { r: "Lamentations 3:23", t: "They are new every morning; great is your faithfulness." },
+        { r: "Ezekiel 36:26", t: "I will also give you a new heart, and I will put a new spirit within you; and I will take away the stony heart out of your flesh, and I will give you a heart of flesh." },
+        { r: "Daniel 12:3", t: "Those who are wise shall shine as the brightness of the expanse; and those who turn many to righteousness as the stars forever and ever." },
+        { r: "Hosea 6:6", t: "For I desire mercy, and not sacrifice; and the knowledge of God more than burnt offerings." },
+        { r: "Joel 2:13", t: "Tear your heart, and not your garments, and turn to Yahweh, your God; for he is gracious and merciful, slow to anger, and abundant in loving kindness, and relents from sending calamity." },
+        { r: "Amos 5:24", t: "But let justice roll on like rivers, and righteousness like a mighty stream." },
+        { r: "Micah 6:8", t: "He has shown you, O man, what is good. What does Yahweh require of you, but to act justly, to love mercy, and to walk humbly with your God?" },
+        { r: "Nahum 1:7", t: "Yahweh is good, a stronghold in the day of trouble; and he knows those who take refuge in him." },
+        { r: "Zephaniah 3:17", t: "Yahweh, your God, is among you, a mighty one who will save. He will rejoice over you with joy. He will calm you in his love. He will rejoice over you with singing." },
+        { r: "Malachi 3:10", t: "Bring the whole tithe into the storehouse, that there may be food in my house, and test me now in this,\u201d says Yahweh of Armies, \u201cif I will not open you the windows of heaven, and pour you out a blessing, that there will not be room enough for." },
+        { r: "Matthew 4:4", t: "But he answered, \u201cIt is written, \u2018Man shall not live by bread alone, but by every word that proceeds out of the mouth of God.\u2019\u201d" },
+        { r: "Matthew 5:3", t: "\u201cBlessed are the poor in spirit, for theirs is the Kingdom of Heaven." },
+        { r: "Matthew 5:4", t: "Blessed are those who mourn, for they shall be comforted." },
+        { r: "Matthew 5:6", t: "Blessed are those who hunger and thirst after righteousness, for they shall be filled." },
+        { r: "Matthew 5:9", t: "Blessed are the peacemakers, for they shall be called children of God." },
+        { r: "Matthew 5:14", t: "You are the light of the world. A city located on a hill can\u2019t be hidden." },
+        { r: "Matthew 5:16", t: "Even so, let your light shine before men; that they may see your good works, and glorify your Father who is in heaven." },
+        { r: "Matthew 6:21", t: "for where your treasure is, there your heart will be also." },
+        { r: "Matthew 6:33", t: "But seek first God\u2019s Kingdom, and his righteousness; and all these things will be given to you as well." },
+        { r: "Matthew 7:7", t: "\u201cAsk, and it will be given you. Seek, and you will find. Knock, and it will be opened for you." },
+        { r: "Matthew 7:12", t: "Therefore whatever you desire for men to do to you, you shall also do to them; for this is the law and the prophets." },
+        { r: "Matthew 11:28", t: "\u201cCome to me, all you who labor and are heavily burdened, and I will give you rest." },
+        { r: "Matthew 11:29", t: "Take my yoke upon you, and learn from me, for I am gentle and humble in heart; and you will find rest for your souls." },
+        { r: "Matthew 11:30", t: "For my yoke is easy, and my burden is light.\u201d" },
+        { r: "Matthew 19:26", t: "Looking at them, Jesus said, \u201cWith men this is impossible, but with God all things are possible.\u201d" },
+        { r: "Matthew 22:37", t: "Jesus said to him, \u201c\u2018You shall love the Lord your God with all your heart, with all your soul, and with all your mind.\u2019" },
+        { r: "Matthew 22:39", t: "A second likewise is this, \u2018You shall love your neighbor as yourself.\u2019" },
+        { r: "Matthew 28:19", t: "Go, and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit," },
+        { r: "Matthew 28:20", t: "teaching them to observe all things that I commanded you. Behold, I am with you always, even to the end of the age.\u201d Amen." },
+        { r: "Mark 10:27", t: "Jesus, looking at them, said, \u201cWith men it is impossible, but not with God, for all things are possible with God.\u201d" },
+        { r: "Mark 11:24", t: "Therefore I tell you, all things whatever you pray and ask for, believe that you have received them, and you shall have them." },
+        { r: "Luke 1:37", t: "For nothing spoken by God is impossible.\u201d" },
+        { r: "Luke 6:31", t: "\u201cAs you would like people to do to you, do exactly so to them." },
+        { r: "Luke 6:38", t: "\u201cGive, and it will be given to you: good measure, pressed down, shaken together, and running over, will be given to you. For with the same measure you measure it will be measured back to you.\u201d" },
+        { r: "Luke 19:10", t: "For the Son of Man came to seek and to save that which was lost.\u201d" },
+        { r: "John 1:1", t: "In the beginning was the Word, and the Word was with God, and the Word was God." },
+        { r: "John 1:12", t: "But as many as received him, to them he gave the right to become God\u2019s children, to those who believe in his name:" },
+        { r: "John 1:14", t: "The Word became flesh, and lived among us. We saw his glory, such glory as of the one and only Son of the Father, full of grace and truth." },
+        { r: "John 3:16", t: "For God so loved the world, that he gave his one and only Son, that whoever believes in him should not perish, but have eternal life." },
+        { r: "John 3:17", t: "For God didn\u2019t send his Son into the world to judge the world, but that the world should be saved through him." },
+        { r: "John 6:35", t: "Jesus said to them, \u201cI am the bread of life. He who comes to me will not be hungry, and he who believes in me will never be thirsty." },
+        { r: "John 8:12", t: "Again, therefore, Jesus spoke to them, saying, \u201cI am the light of the world. He who follows me will not walk in the darkness, but will have the light of life.\u201d" },
+        { r: "John 8:32", t: "You will know the truth, and the truth will make you free.\u201d" },
+        { r: "John 10:10", t: "The thief only comes to steal, kill, and destroy. I came that they may have life, and may have it abundantly." },
+        { r: "John 10:11", t: "I am the good shepherd. The good shepherd lays down his life for the sheep." },
+        { r: "John 10:28", t: "I give eternal life to them. They will never perish, and no one will snatch them out of my hand." },
+        { r: "John 11:25", t: "Jesus said to her, \u201cI am the resurrection and the life. He who believes in me will still live, even if he dies." },
+        { r: "John 13:34", t: "A new commandment I give to you, that you love one another. Just as I have loved you, you also love one another." },
+        { r: "John 13:35", t: "By this everyone will know that you are my disciples, if you have love for one another.\u201d" },
+        { r: "John 14:1", t: "\u201cDon\u2019t let your heart be troubled. Believe in God. Believe also in me." },
+        { r: "John 14:6", t: "Jesus said to him, \u201cI am the way, the truth, and the life. No one comes to the Father, except through me." },
+        { r: "John 14:27", t: "Peace I leave with you. My peace I give to you; not as the world gives, give I to you. Don\u2019t let your heart be troubled, neither let it be fearful." },
+        { r: "John 15:5", t: "I am the vine. You are the branches. He who remains in me, and I in him, the same bears much fruit, for apart from me you can do nothing." },
+        { r: "John 15:13", t: "Greater love has no one than this, that someone lay down his life for his friends." },
+        { r: "John 16:33", t: "I have told you these things, that in me you may have peace. In the world you have oppression; but cheer up! I have overcome the world.\u201d" },
+        { r: "Acts 1:8", t: "But you will receive power when the Holy Spirit has come upon you. You will be witnesses to me in Jerusalem, in all Judea and Samaria, and to the uttermost parts of the earth.\u201d" },
+        { r: "Acts 4:12", t: "There is salvation in none other, for neither is there any other name under heaven, that is given among men, by which we must be saved!\u201d" },
+        { r: "Acts 16:31", t: "They said, \u201cBelieve in the Lord Jesus Christ, and you will be saved, you and your household.\u201d" },
+        { r: "Romans 1:16", t: "For I am not ashamed of the Good News of Christ, for it is the power of God for salvation for everyone who believes; for the Jew first, and also for the Greek." },
+        { r: "Romans 1:17", t: "For in it is revealed God\u2019s righteousness from faith to faith. As it is written, \u201cBut the righteous shall live by faith.\u201d" },
+        { r: "Romans 5:1", t: "Being therefore justified by faith, we have peace with God through our Lord Jesus Christ;" },
+        { r: "Romans 5:8", t: "But God commends his own love toward us, in that while we were yet sinners, Christ died for us." },
+        { r: "Romans 6:23", t: "For the wages of sin is death, but the free gift of God is eternal life in Christ Jesus our Lord." },
+        { r: "Romans 8:1", t: "There is therefore now no condemnation to those who are in Christ Jesus, who don\u2019t walk according to the flesh, but according to the Spirit." },
+        { r: "Romans 8:28", t: "We know that all things work together for good for those who love God, to those who are called according to his purpose." },
+        { r: "Romans 8:31", t: "What then shall we say about these things? If God is for us, who can be against us?" },
+        { r: "Romans 8:38", t: "For I am persuaded that neither death, nor life, nor angels, nor principalities, nor things present, nor things to come, nor powers," },
+        { r: "Romans 8:39", t: "nor height, nor depth, nor any other created thing, will be able to separate us from God\u2019s love, which is in Christ Jesus our Lord." },
+        { r: "Romans 10:9", t: "that if you will confess with your mouth that Jesus is Lord, and believe in your heart that God raised him from the dead, you will be saved." },
+        { r: "Romans 10:17", t: "So faith comes by hearing, and hearing by the word of God." },
+        { r: "Romans 12:1", t: "Therefore I urge you, brothers, by the mercies of God, to present your bodies a living sacrifice, holy, acceptable to God, which is your spiritual service." },
+        { r: "Romans 12:2", t: "Don\u2019t be conformed to this world, but be transformed by the renewing of your mind, so that you may prove what is the good, well-pleasing, and perfect will of God." },
+        { r: "Romans 12:12", t: "rejoicing in hope; enduring in troubles; continuing steadfastly in prayer;" },
+        { r: "Romans 15:13", t: "Now may the God of hope fill you with all joy and peace in believing, that you may abound in hope, in the power of the Holy Spirit." },
+        { r: "1 Corinthians 2:9", t: "But as it is written, \u201cThings which an eye didn\u2019t see, and an ear didn\u2019t hear, which didn\u2019t enter into the heart of man, these God has prepared for those who love him.\u201d" },
+        { r: "1 Corinthians 10:13", t: "No temptation has taken you except what is common to man. God is faithful, who will not allow you to be tempted above what you are able, but will with the temptation also make the way of escape, that you may be able to endure it." },
+        { r: "1 Corinthians 10:31", t: "Whether therefore you eat, or drink, or whatever you do, do all to the glory of God." },
+        { r: "1 Corinthians 13:4", t: "Love is patient and is kind; love doesn\u2019t envy. Love doesn\u2019t brag, is not proud," },
+        { r: "1 Corinthians 13:7", t: "bears all things, believes all things, hopes all things, endures all things." },
+        { r: "1 Corinthians 13:13", t: "But now faith, hope, and love remain \u2014 these three. The greatest of these is love." },
+        { r: "1 Corinthians 15:58", t: "Therefore, my beloved brothers, be steadfast, immovable, always abounding in the Lord\u2019s work, because you know that your labor is not in vain in the Lord." },
+        { r: "1 Corinthians 16:13", t: "Watch! Stand firm in the faith! Be courageous! Be strong!" },
+        { r: "1 Corinthians 16:14", t: "Let all that you do be done in love." },
+        { r: "2 Corinthians 4:16", t: "Therefore we don\u2019t faint, but though our outward man is decaying, yet our inward man is renewed day by day." },
+        { r: "2 Corinthians 4:18", t: "while we don\u2019t look at the things which are seen, but at the things which are not seen. For the things which are seen are temporal, but the things which are not seen are eternal." },
+        { r: "2 Corinthians 5:17", t: "Therefore if anyone is in Christ, he is a new creation. The old things have passed away. Behold, all things have become new." },
+        { r: "2 Corinthians 5:21", t: "For him who knew no sin he made to be sin on our behalf; so that in him we might become the righteousness of God." },
+        { r: "2 Corinthians 9:7", t: "Let each man give according as he has determined in his heart; not grudgingly, or under compulsion; for God loves a cheerful giver." },
+        { r: "2 Corinthians 9:8", t: "And God is able to make all grace abound to you, that you, always having all sufficiency in everything, may abound to every good work." },
+        { r: "2 Corinthians 12:9", t: "He has said to me, \u201cMy grace is sufficient for you, for my power is made perfect in weakness.\u201d Most gladly therefore I will rather glory in my weaknesses, that the power of Christ may rest on me." },
+        { r: "2 Corinthians 12:10", t: "Therefore I take pleasure in weaknesses, in injuries, in necessities, in persecutions, in distresses, for Christ\u2019s sake. For when I am weak, then am I strong." },
+        { r: "Galatians 2:20", t: "I have been crucified with Christ, and it is no longer I that live, but Christ lives in me. That life which I now live in the flesh, I live by faith in the Son of God, who loved me, and gave himself up for me." },
+        { r: "Galatians 5:1", t: "Stand firm therefore in the liberty by which Christ has made us free, and don\u2019t be entangled again with a yoke of bondage." },
+        { r: "Galatians 5:22", t: "But the fruit of the Spirit is love, joy, peace, patience, kindness, goodness, faith," },
+        { r: "Galatians 5:23", t: "gentleness, and self-control. Against such things there is no law." },
+        { r: "Galatians 6:9", t: "Let us not be weary in doing good, for we will reap in due season, if we don\u2019t give up." },
+        { r: "Galatians 6:10", t: "So then, as we have opportunity, let\u2019s do what is good toward all men, and especially toward those who are of the household of the faith." },
+        { r: "Ephesians 2:8", t: "for by grace you have been saved through faith, and that not of yourselves; it is the gift of God," },
+        { r: "Ephesians 2:10", t: "For we are his workmanship, created in Christ Jesus for good works, which God prepared before that we would walk in them." },
+        { r: "Ephesians 3:20", t: "Now to him who is able to do exceedingly abundantly above all that we ask or think, according to the power that works in us," },
+        { r: "Ephesians 4:32", t: "And be kind to one another, tender hearted, forgiving each other, just as God also in Christ forgave you." },
+        { r: "Ephesians 6:10", t: "Finally, be strong in the Lord, and in the strength of his might." },
+        { r: "Ephesians 6:11", t: "Put on the whole armor of God, that you may be able to stand against the wiles of the devil." },
+        { r: "Philippians 1:6", t: "being confident of this very thing, that he who began a good work in you will complete it until the day of Jesus Christ." },
+        { r: "Philippians 2:3", t: "doing nothing through rivalry or through conceit, but in humility, each counting others better than himself;" },
+        { r: "Philippians 2:13", t: "For it is God who works in you both to will and to work, for his good pleasure." },
+        { r: "Philippians 3:14", t: "I press on toward the goal for the prize of the high calling of God in Christ Jesus." },
+        { r: "Philippians 4:4", t: "Rejoice in the Lord always! Again I will say, \u201cRejoice!\u201d" },
+        { r: "Philippians 4:6", t: "In nothing be anxious, but in everything, by prayer and petition with thanksgiving, let your requests be made known to God." },
+        { r: "Philippians 4:7", t: "And the peace of God, which surpasses all understanding, will guard your hearts and your thoughts in Christ Jesus." },
+        { r: "Philippians 4:13", t: "I can do all things through Christ, who strengthens me." },
+        { r: "Philippians 4:19", t: "My God will supply every need of yours according to his riches in glory in Christ Jesus." },
+        { r: "Colossians 1:27", t: "to whom God was pleased to make known what are the riches of the glory of this mystery among the Gentiles, which is Christ in you, the hope of glory;" },
+        { r: "Colossians 3:1", t: "If then you were raised together with Christ, seek the things that are above, where Christ is, seated on the right hand of God." },
+        { r: "Colossians 3:13", t: "bearing with one another, and forgiving each other, if any man has a complaint against any; even as Christ forgave you, so you also do." },
+        { r: "Colossians 3:16", t: "Let the word of Christ dwell in you richly; in all wisdom teaching and admonishing one another with psalms, hymns, and spiritual songs, singing with grace in your heart to the Lord." },
+        { r: "Colossians 3:17", t: "Whatever you do, in word or in deed, do all in the name of the Lord Jesus, giving thanks to God the Father, through him." },
+        { r: "Colossians 3:23", t: "And whatever you do, work heartily, as for the Lord, and not for men," },
+        { r: "Colossians 4:2", t: "Continue steadfastly in prayer, watching therein with thanksgiving;" },
+        { r: "1 Thessalonians 5:16", t: "Rejoice always." },
+        { r: "1 Thessalonians 5:17", t: "Pray without ceasing." },
+        { r: "1 Thessalonians 5:18", t: "In everything give thanks, for this is the will of God in Christ Jesus toward you." },
+        { r: "1 Thessalonians 5:23", t: "May the God of peace himself sanctify you completely. May your whole spirit, soul, and body be preserved blameless at the coming of our Lord Jesus Christ." },
+        { r: "2 Thessalonians 3:3", t: "But the Lord is faithful, who will establish you, and guard you from the evil one." },
+        { r: "2 Thessalonians 3:16", t: "Now may the Lord of peace himself give you peace at all times in all ways. The Lord be with you all." },
+        { r: "1 Timothy 1:15", t: "The saying is faithful and worthy of all acceptance, that Christ Jesus came into the world to save sinners; of whom I am chief." },
+        { r: "1 Timothy 4:12", t: "Let no man despise your youth; but be an example to those who believe, in word, in your way of life, in love, in spirit, in faith, and in purity." },
+        { r: "1 Timothy 6:12", t: "Fight the good fight of faith. Take hold of the eternal life to which you were called, and you confessed the good confession in the sight of many witnesses." },
+        { r: "2 Timothy 1:7", t: "For God didn\u2019t give us a spirit of fear, but of power, love, and self-control." },
+        { r: "2 Timothy 3:16", t: "Every Scripture is God-breathed and profitable for teaching, for reproof, for correction, and for instruction in righteousness," },
+        { r: "2 Timothy 3:17", t: "that the man of God may be complete, thoroughly equipped for every good work." },
+        { r: "2 Timothy 4:7", t: "I have fought the good fight. I have finished the course. I have kept the faith." },
+        { r: "Titus 2:13", t: "looking for the blessed hope and appearing of the glory of our great God and Savior, Jesus Christ;" },
+        { r: "Titus 3:5", t: "not by works of righteousness which we did ourselves, but according to his mercy, he saved us through the washing of regeneration and renewing by the Holy Spirit," },
+        { r: "Hebrews 4:12", t: "For the word of God is living and active, and sharper than any two-edged sword, piercing even to the dividing of soul and spirit, of both joints and marrow, and is able to discern the thoughts and intentions of the heart." },
+        { r: "Hebrews 4:16", t: "Let us therefore draw near with boldness to the throne of grace, that we may receive mercy, and may find grace for help in time of need." },
+        { r: "Hebrews 10:23", t: "let us hold fast the confession of our hope without wavering; for he who promised is faithful." },
+        { r: "Hebrews 11:1", t: "Now faith is assurance of things hoped for, proof of things not seen." },
+        { r: "Hebrews 11:6", t: "Without faith it is impossible to be well pleasing to him, for he who comes to God must believe that he exists, and that he is a rewarder of those who seek him." },
+        { r: "Hebrews 12:1", t: "Therefore let us also, seeing we are surrounded by so great a cloud of witnesses, lay aside every weight and the sin which so easily entangles us, and let us run with perseverance the race that is set before us," },
+        { r: "Hebrews 12:2", t: "looking to Jesus, the author and perfecter of faith, who for the joy that was set before him endured the cross, despising its shame, and has sat down at the right hand of the throne of God." },
+        { r: "Hebrews 13:5", t: "Be free from the love of money, content with such things as you have, for he has said, \u201cI will in no way leave you, neither will I in any way forsake you.\u201d" },
+        { r: "Hebrews 13:8", t: "Jesus Christ is the same yesterday, today, and forever." },
+        { r: "James 1:2", t: "Count it all joy, my brothers, when you fall into various temptations," },
+        { r: "James 1:5", t: "But if any of you lacks wisdom, let him ask of God, who gives to all liberally and without reproach; and it will be given to him." },
+        { r: "James 1:17", t: "Every good gift and every perfect gift is from above, coming down from the Father of lights, with whom can be no variation, nor turning shadow." },
+        { r: "James 1:22", t: "But be doers of the word, and not only hearers, deluding your own selves." },
+        { r: "James 4:7", t: "Be subject therefore to God. But resist the devil, and he will flee from you." },
+        { r: "James 4:8", t: "Draw near to God, and he will draw near to you. Cleanse your hands, you sinners; and purify your hearts, you double-minded." },
+        { r: "James 5:16", t: "Confess your offenses to one another, and pray for one another, that you may be healed. The insistent prayer of a righteous person is powerfully effective." },
+        { r: "1 Peter 1:3", t: "Blessed be the God and Father of our Lord Jesus Christ, who according to his great mercy caused us to be born again to a living hope through the resurrection of Jesus Christ from the dead," },
+        { r: "1 Peter 2:9", t: "But you are a chosen race, a royal priesthood, a holy nation, a people for God\u2019s own possession, that you may proclaim the excellence of him who called you out of darkness into his marvelous light:" },
+        { r: "1 Peter 3:15", t: "But sanctify the Lord God in your hearts; and always be ready to give an answer to everyone who asks you a reason concerning the hope that is in you, with humility and fear:" },
+        { r: "1 Peter 5:7", t: "casting all your worries on him, because he cares for you." },
+        { r: "1 Peter 5:10", t: "But may the God of all grace, who called you to his eternal glory by Christ Jesus, after you have suffered a little while, perfect, establish, strengthen, and settle you." },
+        { r: "2 Peter 1:3", t: "seeing that his divine power has granted to us all things that pertain to life and godliness, through the knowledge of him who called us by his own glory and virtue;" },
+        { r: "2 Peter 3:9", t: "The Lord is not slow concerning his promise, as some count slowness; but is patient with us, not wishing that any should perish, but that all should come to repentance." },
+        { r: "1 John 1:7", t: "But if we walk in the light, as he is in the light, we have fellowship with one another, and the blood of Jesus Christ, his Son, cleanses us from all sin." },
+        { r: "1 John 1:9", t: "If we confess our sins, he is faithful and righteous to forgive us the sins, and to cleanse us from all unrighteousness." },
+        { r: "1 John 3:1", t: "See how great a love the Father has given to us, that we should be called children of God! For this cause the world doesn\u2019t know us, because it didn\u2019t know him." },
+        { r: "1 John 3:16", t: "By this we know love, because he laid down his life for us. And we ought to lay down our lives for the brothers." },
+        { r: "1 John 4:8", t: "He who doesn\u2019t love doesn\u2019t know God, for God is love." },
+        { r: "1 John 4:16", t: "We know and have believed the love which God has for us. God is love, and he who remains in love remains in God, and God remains in him." },
+        { r: "1 John 4:18", t: "There is no fear in love; but perfect love casts out fear, because fear has punishment. He who fears is not made perfect in love." },
+        { r: "1 John 4:19", t: "We love him, because he first loved us." },
+        { r: "1 John 5:13", t: "These things I have written to you who believe in the name of the Son of God, that you may know that you have eternal life, and that you may continue to believe in the name of the Son of God." },
+        { r: "1 John 5:14", t: "This is the boldness which we have toward him, that, if we ask anything according to his will, he listens to us." },
+        { r: "Jude 1:24", t: "Now to him who is able to keep them from stumbling, and to present you faultless before the presence of his glory in great joy," },
+        { r: "Jude 1:25", t: "to God our Savior, who alone is wise, be glory and majesty, dominion and power, both now and forever. Amen." },
+        { r: "Revelation 1:8", t: "\u201cI am the Alpha and the Omega,\u201d says the Lord God, \u201cwho is and who was and who is to come, the Almighty.\u201d" },
+        { r: "Revelation 3:20", t: "Behold, I stand at the door and knock. If anyone hears my voice and opens the door, then I will come in to him, and will dine with him, and he with me." },
+        { r: "Revelation 21:3", t: "I heard a loud voice out of heaven saying, \u201cBehold, God\u2019s dwelling is with people, and he will dwell with them, and they will be his people, and God himself will be with them as their God." },
+        { r: "Revelation 21:4", t: "He will wipe away from them every tear from their eyes. Death will be no more; neither will there be mourning, nor crying, nor pain, any more. The first things have passed away.\u201d" },
+        { r: "Revelation 22:13", t: "I am the Alpha and the Omega, the First and the Last, the Beginning and the End." },
+        { r: "Revelation 22:20", t: "He who testifies these things says, \u201cYes, I come quickly.\u201d Amen! Yes, come, Lord Jesus." }
+      ];
 
-        function applyFilters() {
-          var term = search.value.trim().toLowerCase();
-          var visible = 0;
+      var card = document.getElementById("card");
+      var verseText = document.getElementById("verseText");
+      var verseRef = document.getElementById("verseRef");
+      var copyBtn = document.getElementById("copyBtn");
+      var current = -1;
+      var copyTimer = null;
 
-          sections.forEach(function (section) {
-            var categoryMatches = activeCategory === 'all' || section.dataset.category === activeCategory;
-            var sectionVisible = 0;
-            var sectionLinks = Array.prototype.slice.call(section.querySelectorAll('.link'));
-
-            sectionLinks.forEach(function (link) {
-              var textMatches = !term || link.dataset.search.indexOf(term) !== -1 || link.textContent.toLowerCase().indexOf(term) !== -1;
-              var show = categoryMatches && textMatches;
-              link.hidden = !show;
-              if (show) sectionVisible += 1;
-            });
-
-            section.hidden = sectionVisible === 0;
-            if (sectionVisible > 0) {
-              var countLabel = section.querySelector('.section-count');
-              countLabel.textContent = sectionVisible + (sectionVisible === 1 ? ' page' : ' pages');
-              visible += sectionVisible;
-            }
-          });
-
-          count.textContent = visible + (visible === 1 ? ' destination' : ' destinations');
-          empty.classList.toggle('visible', visible === 0);
+      function draw() {
+        var next = current;
+        if (VERSES.length > 1) {
+          while (next === current) {
+            next = Math.floor(Math.random() * VERSES.length);
+          }
+        } else {
+          next = 0;
         }
-
-        search.addEventListener('input', applyFilters);
-
-        filters.forEach(function (button) {
-          button.addEventListener('click', function () {
-            activeCategory = button.dataset.filter;
-            filters.forEach(function (item) {
-              item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
-            });
-            applyFilters();
-          });
-        });
-
-        applyFilters();
-      })();
-    </script>
-    <script>
-      if ('serviceWorker' in navigator) {
-        try {
-          navigator.serviceWorker.register('sw.js');
-        } catch (err) {
-          /* Service worker registration failed; the page works without it. */
-        }
+        current = next;
+        verseText.textContent = VERSES[current].t;
+        verseRef.textContent = VERSES[current].r;
+        card.classList.remove("swap");
+        void card.offsetWidth;
+        card.classList.add("swap");
       }
-    </script>
-    <script data-goatcounter="https://jesuslovestyler.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-    <script>
-      (function () {
-        var wrap = document.getElementById('visit-count');
-        var num = document.getElementById('visit-count-num');
 
-        function show(count) {
-          num.textContent = String(count);
-          wrap.hidden = false;
+      function copyVerse() {
+        if (current < 0) return;
+        var v = VERSES[current];
+        var text = v.t + " \u2014 " + v.r + " (WEB)";
+        function done() {
+          copyBtn.textContent = "Copied \u2713";
+          if (copyTimer) clearTimeout(copyTimer);
+          copyTimer = setTimeout(function () { copyBtn.textContent = "Copy verse"; }, 1800);
         }
-
-        /* Fallback: the goatcounter.visit_count integration. Unhide only
-           once the count text has actually been written into the element. */
-        function fallback() {
-          var tries = 0;
-          var timer = setInterval(function () {
-            tries += 1;
-            if (window.goatcounter && typeof window.goatcounter.visit_count === 'function') {
-              clearInterval(timer);
-              try {
-                window.goatcounter.visit_count({ append: '#visit-count-num', no_branding: false });
-              } catch (err) {
-                return; /* Count unavailable; the counter stays hidden. */
-              }
-              var checks = 0;
-              var reveal = setInterval(function () {
-                checks += 1;
-                if (num.textContent.trim() !== '') {
-                  wrap.hidden = false;
-                  clearInterval(reveal);
-                } else if (checks > 40) {
-                  clearInterval(reveal); /* Count never arrived; stay hidden. */
-                }
-              }, 250);
-            } else if (tries > 40) {
-              clearInterval(timer); /* GoatCounter never loaded; stay hidden. */
-            }
-          }, 250);
-        }
-
-        /* Primary: GoatCounter's public counter JSON for the home page
-           (path '/' URL-encoded as %2F). */
-        var done = false;
-        if (window.fetch) {
-          fetch('https://jesuslovestyler.goatcounter.com/counter/%2F.json')
-            .then(function (res) {
-              if (!res.ok) throw new Error('Counter request failed');
-              return res.json();
-            })
-            .then(function (data) {
-              var count = data ? data.count : null;
-              if (count !== null && count !== undefined && String(count).trim() !== '') {
-                done = true;
-                show(String(count).trim());
-              } else if (!done) {
-                done = true;
-                fallback();
-              }
-            })
-            .catch(function () {
-              if (!done) {
-                done = true;
-                fallback();
-              }
-            });
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done, function () { fallback(); });
         } else {
           fallback();
         }
-      })();
-    </script>
-    <script>
-      window.addEventListener('appinstalled', function () {
-        if (window.goatcounter && typeof window.goatcounter.count === 'function') {
-          window.goatcounter.count({ path: 'app-installed', event: true });
+        function fallback() {
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          try { document.execCommand("copy"); done(); } catch (e) {}
+          document.body.removeChild(ta);
         }
-      });
+      }
+
+      document.getElementById("drawBtn").addEventListener("click", draw);
+      document.getElementById("anotherBtn").addEventListener("click", draw);
+      copyBtn.addEventListener("click", copyVerse);
+
+      draw();
     </script>
   </body>
 </html>
