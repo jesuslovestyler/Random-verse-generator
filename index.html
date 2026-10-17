@@ -131,6 +131,20 @@
         touch-action: manipulation;
       }
       .row button:active { transform: scale(0.99); }
+      .home-pill {
+        align-self: flex-start;
+        display: inline-block;
+        margin-bottom: 14px;
+        padding: 7px 14px;
+        border: 1.5px solid var(--btn2-border);
+        border-radius: 999px;
+        background: var(--card);
+        color: var(--btn2-ink);
+        font-size: 0.88rem;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .home-pill:active { transform: scale(0.98); }
       footer {
         margin-top: auto;
         padding-top: 22px;
@@ -143,6 +157,7 @@
   </head>
   <body>
     <main class="wrap">
+      <a class="home-pill" href="https://jesuslovestyler.com/">⌂ Home</a>
       <p class="intro">A verse for this moment, drawn at random from all 31,102 verses of the whole Bible — like letting the pages fall open where they will.</p>
 
       <section class="card" id="card" aria-live="polite">
@@ -252,5 +267,6 @@
 
       draw();
     </script>
+    <script data-goatcounter="https://jesuslovestyler.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
   </body>
 </html>
